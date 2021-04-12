@@ -17,8 +17,32 @@
  * }
  */
 
-function removeKFromList(/* l, k */) {
-  throw new Error('Not implemented');
+function removeKFromList(l, k) {
+  function ListNode(x) {
+    this.value = x;
+    this.next = null;
+  }
+  class Queue {
+    enqueue(x) {
+      const newNode = new ListNode(x);
+      newNode.value = x;
+      newNode.next = null;
+      newNode.tail = this.tail;
+      if (this.tail) this.tail.next = newNode;
+      else this.head = newNode;
+
+      this.tail = newNode;
+    }
+  }
+
+  const queue = new Queue();
+
+  for (let i = 0; i < l.length; i++) {
+    if (l[i] !== k) {
+      queue.enqueue(l[i]);
+    }
+  }
+  return queue;
 }
 
 module.exports = removeKFromList;
